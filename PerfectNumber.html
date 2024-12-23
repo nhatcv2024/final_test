@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PerfectNumber</title>
+</head>
+<body>
+<script>
+    function isPerfectNumber(number) {
+        // Kiểm tra số nhập vào có phải là số nguyên dương không
+        if (number <= 0) {
+            return false;
+        }
+        // Tính tổng các ước số
+        let sum = 1; // Bắt đầu từ 1 vì 1 luôn là ước số
+        for (let i = 2; i * i <= number; i++) {
+            if (number % i === 0) {
+                sum += i;
+                // Nếu i là ước số thì number/i cũng là ước số
+                if (i !== number / i) {
+                    sum += number / i;
+                }
+            }
+        }
+
+        // Kiểm tra tổng các ước số có bằng chính số đó không
+        return sum === number;
+    }
+
+    function testNumber() {
+        let num;
+        do {
+            num = parseInt(prompt("Nhập vào một số nguyên dương: "));
+        } while (isNaN(num) || num <= 0);
+
+        // Kiểm tra và hiển thị kết quả
+        const result = isPerfectNumber(num);
+        if (result) {
+            alert(`${num} là số hoàn hảo.`);
+        } else {
+            alert(`${num} không phải là số hoàn hảo.`);
+        }
+    }
+    // Gọi hàm để chạy chương trình
+    testNumber();
+
+</script>
+</body>
+</html>

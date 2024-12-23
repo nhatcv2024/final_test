@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // Hàm kiểm tra năm nhuận
+    function getLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    }
+    // Hàm tính số ngày trong tháng
+    function getDaysMonth(month, year) {
+        if (month < 1 || month > 12 || year <= 0 || isNaN(month) || isNaN(year)) {
+            return "Tháng và năm không hợp lệ.";
+        }
+        // Kiểm tra tháng 2
+        if (month === 2) {
+            if (getLeapYear(year)) {
+                return 29;  // Năm nhuận
+            } else {
+                return 28;  // Không phải năm nhuận
+            }
+        }
+        // Các tháng còn lại
+        const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        return days[month - 1];
+    }
+    // Hàm kiểm tra định dạng của tháng năm nhập vào MM/yyyy
+    function isValidDate(dateStr) {
+        const regex = /^(0[1-9]|1[0-2])\/\d{4}$/;  // Kiểm tra định dạng MM/yyyy
+        return regex.test(dateStr);
+    }
+    // Nhập tháng và năm từ người dùng
+    let inputMonthYear = prompt("Vui lòng nhập tháng và năm theo định dạng MM/yyyy:");
+    if (isValidDate(inputMonthYear)) {
+        let [month, year] = inputMonthYear.split('/').map(Number);  // Tách tháng và năm
+        let days = getDaysMonth(month, year);
+        alert(`Tháng ${month} năm ${year} có ${days} ngày.`);
+    } else {
+        alert("Định dạng ngày tháng không hợp lệ. Vui lòng nhập đúng định dạng MM/yyyy.");
+    }
+</script>
+</body>
+</html>
